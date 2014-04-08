@@ -1,0 +1,40 @@
+heat_template_version: 2013-05-23
+
+description:
+  template should spin up a single FC20 instance
+  
+# parameter_groups:
+#   label: host_parameter_inputs
+#     parameters:
+#       adminPass
+#         type: <string | number | json | comma_delimited_list>
+#         label: <human-readable name of the parameter>
+#         description: <description of the parameter>
+#         default: <default value for parameter>
+#         hidden: <true | false>
+#         constraints:
+#           <parameter constraints>
+#       flavor
+#       image
+#       hostname
+#       datavol_size
+    
+resources:
+  compute_instance:
+    type: "Rackspace::Cloud::Server"
+    properties:
+      admin_pass: "misterboogedy"
+      flavor: 512MB Standard Instance
+      image: Fedora 20 (Heisenbug) (PVHVM)
+      name: ponytest stack
+      
+outputs:
+  public_ip:
+    description: public IP of the deployed instance
+    value: { get_attr: [compute_instance, accessIPv4] }
+  instance_name:
+    description: name of new instance
+    value: { get_attr: [compute_instance, instance_name] }
+  instance_details:
+    description: details of new instance
+    value: { get_attr: [compute_instance, show] }

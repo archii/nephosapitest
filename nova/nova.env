@@ -1,0 +1,9 @@
+export OS_AUTH_URL=https://identity.api.rackspacecloud.com/v2.0/
+export OS_AUTH_SYSTEM=rackspace
+export OS_REGION_NAME=DFW
+export OS_USERNAME=<username>
+export OS_TENANT_NAME=<tenant_id>
+export NOVA_RAX_AUTH=1
+export OS_PASSWORD=<api_key>
+export OS_PROJECT_ID=<tenant_id>
+export OS_NO_CACHE=1
