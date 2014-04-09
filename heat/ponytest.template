@@ -26,7 +26,8 @@ resources:
       admin_pass: "misterboogedy"
       flavor: 512MB Standard Instance
       image: Fedora 20 (Heisenbug) (PVHVM)
-      name: "pony99"
+      name: "pony98"
+      personality: {"/var/tmp/fyou": "Can I get a hell yeah..."}
             
 outputs:
   public_ip:
