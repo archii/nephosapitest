@@ -1,0 +1,111 @@
+heat_template_version: 2013-05-23
+
+description:
+  template should spin up a single FC20 instance
+
+parameters:
+  myMonde:
+    type: string
+    default: "Terra1"
+  foo:
+    type: string
+    default: "barbaz"
+  my_hostname:
+    type: string
+    label: my_hostname
+    description: base hostname of the instance
+    default: "eggs664"
+    hidden: false
+    constraints:
+      - allowed_pattern: "[a-z0-9]+"
+        description: hostname must consist of lowercase characters and numbers only.
+      - length: { min: 6, max: 8 }
+        description: Password length must be between 6 and 8 characters.
+
+#parameter_groups:
+#   label: host_parameter_inputs
+#     parameters:
+#       my_hostname
+#         type: string
+#         label: my_hostname
+#         description: base hostname of the instance
+#         default: "test001"
+#         hidden: false
+#         constraints: 
+#           - allowed_pattern: "[a-z0-9]+"
+#             description: hostname must consist of lowercase characters and numbers only.
+#           - length: { min: 6, max: 8 }
+#             description: Password length must be between 6 and 8 characters.
+#       adminPass
+#         type: <string | number | json | comma_delimited_list>
+#         label: <human-readable name of the parameter>
+#         description: <description of the parameter>
+#         default: <default value for parameter>
+#         hidden: <true | false>
+#         constraints:
+#           <parameter constraints>
+#       flavor
+#       image
+#       hostname
+#       datavol_size
+    
+resources:
+  compute_instance:
+    type: "Rackspace::Cloud::Server"
+    properties:
+      admin_pass: "misterboogedy"
+      flavor: 512MB Standard Instance
+      image: Fedora 20 (Heisenbug) (PVHVM)
+      name: { get_param: my_hostname }
+      #personality: {"/etc/hostname": { get_param: my_hostname }, "/etc/sysconfig/iptables": { get_file: /home/admin/code/archii/raxapitest/heat/iptables.config } }
+      #personality: {"/etc/hostname": { get_param: foo } }
+      user_data:
+        str_replace:
+          template: |
+            #!/bin/bash
+            echo "Hello $monde" > /var/tmp/hmonde;
+            yum -y -v remove firewalld;
+            #yum install iptables-services
+            #yum install git
+            #service iptables-service restart
+            #$echo "Setting MySQL root password"
+            #mysqladmin -u root password $db_rootpassword
+            # do more things ...
+          params:
+            #$db_rootpassword: { get_param: DBRootPassword }
+            $monde: { get_param: myMonde }
+#
+#      user_data: >
+#          #!/bin/bash
+#          echo "Hello $monde" \| tee /var/tmp/hmonde
+#          yum remove firewalld
+#          yum install iptables-services
+#          yum install git
+#          #service iptables-service restart
+#          #$echo "Setting MySQL root password"
+#          #mysqladmin -u root password $db_rootpassword
+#          # do more things ...
+#          
+outputs:
+  foo:
+    description: foo
+    value: { get_param: foo }
+  public_ip:
+    description: public IP of the deployed instance
+    value: { get_attr: [compute_instance, accessIPv4] }
+#  instance_name:
+#    description: name of new instance
+#    value: { get_attr: [compute_instance, instance_name] }
+  instance_param_hostname:
+    description: hostname according to the my_hostname param
+    value: { get_param: my_hostname }
+  displayname:
+    description: my_hostname with newline chaacters
+    value:
+      str_replace:
+        template: name\n
+        params:
+          name: { get_param: my_hostname }
+  instance_details:
+    description: details of new instance
+    value: { get_attr: [compute_instance, show] }
