@@ -68,8 +68,11 @@ resources:
             sleep 60;
             yum -y -v remove firewalld && \
             yum -y -v install iptables-services && \
-            service iptables enable && \
-            service iptables restart;
+            sleep 30 && \
+            #service iptables enable && \
+            #sleep 30 && \
+            service iptables restart && \
+            exit 0;
             #yum -y -v install git;
             #
             #$echo "Setting MySQL root password"
