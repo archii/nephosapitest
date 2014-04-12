@@ -14,7 +14,7 @@ parameters:
     type: string
     label: my_hostname
     description: base hostname of the instance
-    default: "eggs664"
+    default: "eggs687"
     hidden: false
     constraints:
       - allowed_pattern: "[a-z0-9]+"
@@ -65,9 +65,10 @@ resources:
             #!/bin/bash
             echo "Hello $monde" > /var/tmp/hmonde;
             yum -y -v remove firewalld;
-            #yum install iptables-services
-            #yum install git
-            #service iptables-service restart
+            yum -y -v install git;
+            #yum -y -v install iptables-services;
+            #service iptables-service enable;
+            #service iptables-service restart;
             #$echo "Setting MySQL root password"
             #mysqladmin -u root password $db_rootpassword
             # do more things ...
