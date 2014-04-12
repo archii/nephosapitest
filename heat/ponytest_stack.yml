@@ -55,11 +55,13 @@ resources:
     properties:
       admin_pass: "misterboogedy"
       flavor: 512MB Standard Instance
-      image: Fedora 20 (Heisenbug) (PVHVM)
+      image: eggs687-201404130220
       name: { get_param: my_hostname }
       #personality: {"/etc/hostname": { get_param: my_hostname }, "/etc/sysconfig/iptables": { get_file: /home/admin/code/archii/raxapitest/heat/iptables.config } }
       #personality: {"/etc/hostname": { get_param: foo } }
-      personality: { "/etc/sysconfig/iptables": { get_file: /home/admin/code/archii/raxapitest/heat/support/iptables.config } }
+      personality: { 
+        "/etc/sysconfig/iptables": { get_file: /home/admin/code/archii/raxapitest/heat/support/iptables.config }
+      }
       user_data:
         str_replace:
           template: |
@@ -69,9 +71,8 @@ resources:
             yum -y -v remove firewalld && \
             yum -y -v install iptables-services && \
             sleep 30 && \
-            #service iptables enable && \
-            #sleep 30 && \
-            service iptables restart && \
+            service iptables restart;
+            yum -y -v update && \
             exit 0;
             #yum -y -v install git;
             #
