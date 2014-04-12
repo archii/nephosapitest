@@ -59,16 +59,20 @@ resources:
       name: { get_param: my_hostname }
       #personality: {"/etc/hostname": { get_param: my_hostname }, "/etc/sysconfig/iptables": { get_file: /home/admin/code/archii/raxapitest/heat/iptables.config } }
       #personality: {"/etc/hostname": { get_param: foo } }
+      #personality: {"/etc/sysconfig/iptables": { get_file: /home/admin/code/archii/raxapitest/heat/iptables.config } }
+      personality: {"/etc/sysconfig/iptables": get_file: /home/admin/code/archii/raxapitest/heat/iptables.config }
       user_data:
         str_replace:
           template: |
             #!/bin/bash
             echo "Hello $monde" > /var/tmp/hmonde;
-            yum -y -v remove firewalld;
-            yum -y -v install git;
-            #yum -y -v install iptables-services;
-            #service iptables-service enable;
-            #service iptables-service restart;
+            sleep 60;
+            yum -y -v remove firewalld && \
+            yum -y -v install iptables-services && \
+            service iptables enable && \
+            service iptables restart;
+            #yum -y -v install git;
+            #
             #$echo "Setting MySQL root password"
             #mysqladmin -u root password $db_rootpassword
             # do more things ...
