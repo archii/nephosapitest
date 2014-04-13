@@ -11,16 +11,8 @@ function getStackStatus () {
     heat stack-show $STACK_NAME | grep "stack_status " | awk -F"|" '{print $3}' | sed -e 's/^ //'
 }
 
-sleep 20;
-
-status=`getStackStatus`
-
-sleep 20; 
-
 while [ `getStackStatus` == "CREATE_IN_PROGRESS" ]; do
-    echo `getStackStatus`;
-    sleep 20;
+    echo "Polling for status in 60 seconds...";
+    sleep 60;
+    echo `getStackStatus`
 done
-
-echo `getStackStatus`;
-
