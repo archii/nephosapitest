@@ -73,6 +73,7 @@ resources:
             sleep 30 && \
             service iptables restart;
             yum -y -v update && \
+            systemctl enable iptables.service && \
             exit 0;
             #yum -y -v install git;
             #
