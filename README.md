@@ -2,7 +2,7 @@
 ----------
 Some demo files for using the Rackspace Heat API and other APIs.
 
-To use: 
+To use 
 	install the python-heatclient Python package: 'pip install python-heatclient'
 	setup your Heat API ENV variables via .bashrc
 	run 'make'
