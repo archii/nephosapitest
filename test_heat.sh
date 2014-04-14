@@ -20,7 +20,7 @@ if [[ -z $IMAGE_NAME ]]; then
     IMAGE_NAME='';
 fi
 
-heat stack-create -f $STACK_TEMPLATE $STACK_NAME -P myhostname=${HOST_NAME};myimagename=${IMAGE_NAME}
+heat stack-create -f $STACK_TEMPLATE $STACK_NAME -P "myhostname=${HOST_NAME};myimagename=${IMAGE_NAME}"
 
 function getStackStatus () {
     heat stack-show $STACK_NAME | grep "stack_status " | awk -F"|" '{print $3}' | sed -e 's/^ //'
