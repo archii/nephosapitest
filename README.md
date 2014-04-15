@@ -1,6 +1,6 @@
 # raxapitest
 ----------
-Some demo files for using the Rackspace Heat API and other APIs.
+Some demo files for using the Rackspace APIs with Python.
 
 To use 
 	install the python-heatclient Python package: 'pip install python-heatclient'
