@@ -1,3 +1,4 @@
+- HOTDOG
 - Jenkins project to automatically build the stack on check-in etc
 - Migrate ad-hoc user-data commands to Chef recipes
 - use a custom Python wrapper around the pyrax/heatclient/novaclient APIs
