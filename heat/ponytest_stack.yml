@@ -89,7 +89,7 @@ resources:
         str_replace:
           template: |
             #!/bin/bash
-            /opt/raxapitest/7424base_bootstrap.sh;
+            bash /opt/raxapitest/7424base_bootstrap.sh;
             #yum -y -v install git;
             #
             #$echo "Setting MySQL root password"
