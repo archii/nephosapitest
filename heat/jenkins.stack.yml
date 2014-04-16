@@ -20,7 +20,7 @@ parameters:
     type: string
     label: myhostname
     description: base hostname of the instance
-    default: "jenkins423"
+    default: "jenkins0"
     hidden: false
     constraints:
       - allowed_pattern: "[a-z0-9]+"
