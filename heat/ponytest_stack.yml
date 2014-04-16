@@ -89,15 +89,7 @@ resources:
         str_replace:
           template: |
             #!/bin/bash
-            echo "Hello $monde" > /var/tmp/hmonde;
-            sleep 60;
-            yum -y -v remove firewalld && \
-            yum -y -v install iptables-services && \
-            sleep 30 && \
-            service iptables restart;
-            yum -y -v update && \
-            systemctl enable iptables.service && \
-            exit 0;
+            /opt/raxapitest/7424base_bootstrap.sh;
             #yum -y -v install git;
             #
             #$echo "Setting MySQL root password"
