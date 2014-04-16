@@ -57,7 +57,7 @@ resources:
             #!/bin/bash
             bash /opt/raxapitest/7424base_bootstrap.sh && \
             bash /opt/raxapitest/jenkins_bootstrap.sh;
-           params:
+          params:
             $monde: { get_param: myMonde }
 
 outputs:
