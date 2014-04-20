@@ -1,4 +1,5 @@
 - Jenkins project to automatically build the stack on check-in etc
 - Migrate ad-hoc user-data commands to Chef recipes
-- use a custom Python wrapper around PyRax
+- use a custom Python wrapper around the pyrax/heatclient/novaclient APIs
 - bolt on a web form gui for entering template parameters and kicking off the Heat build with the template
+- add an extra server, a load balancer and monitoring to the template
