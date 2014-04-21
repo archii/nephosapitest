@@ -24,7 +24,7 @@ else
     PARAMS="myhostname=${HOST_NAME};myimagename=${IMAGE_NAME}";
 fi
 
-heat stack-create -f $STACK_TEMPLATE $STACK_NAME -P $PARAMS
+heat stack-create -f $STACK_TEMPLATE $STACK_NAME -P $PARAMS || exit 5
 
 function stackExists () {
     heat stack-list -f name=${STACK_NAME}  | grep ${STACK_NAME} 
