@@ -10,3 +10,6 @@ test_heat2:
 
 jenkins3:
 	time heat stack-create jenkins3.stack -f heat/jenkins.stack.yml -P "myhostname=jenkins3;myimagename=eggs687-201404130220"
+
+npf3:
+	time heat stack-create npf3.stack -f heat/npf.stack.yml -P "myhostname=npf3;myimagename=eggs687-201404130220"
