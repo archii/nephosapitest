@@ -13,10 +13,13 @@ php-pear \
 php-mcrypt \
 ;
 
-#php-pecl-memcache
-#php-pecl-imagick
-#php-pecl-ssh2
+#yum -y -v \
+#php-pecl-memcache \
+#php-pecl-imagick \
+#php-pecl-ssh2;
 
 adduser -r -M nginx;
 
-cd /etc/nginx && tar -czf ~/NGINX_Config.tar.gz nginx.conf fastcgi_params 
+cd /etc/nginx && tar -czf ~/NGINX_Config.tar.gz nginx.conf fastcgi_params;
+
+systemctl start nginx && systemctl enable nginx;
