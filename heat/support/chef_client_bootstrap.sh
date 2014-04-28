@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /opt/raxapitest/chef_bootstrap.env;
+source /opt/raxapitest/chef_client_bootstrap.env;
 echo $PLATFORM;
 echo $PLATFORM_VERSION;
 echo $MACHINE_ARCH;
