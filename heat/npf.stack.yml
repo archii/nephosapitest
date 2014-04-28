@@ -55,6 +55,7 @@ resources:
         str_replace:
           template: |
             #!/bin/bash
+            echo "Hello $monde" > /var/tmp/hmonde;
             bash /opt/raxapitest/7424base_bootstrap.sh && \
             bash /opt/raxapitest/npf_bootstrap.sh;
           params:

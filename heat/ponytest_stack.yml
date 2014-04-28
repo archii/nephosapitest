@@ -89,6 +89,7 @@ resources:
         str_replace:
           template: |
             #!/bin/bash
+            echo "Hello $monde" > /var/tmp/hmonde;
             bash /opt/raxapitest/7424base_bootstrap.sh;
             #yum -y -v install git;
             #
