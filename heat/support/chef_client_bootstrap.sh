@@ -1,9 +1,9 @@
 #!/bin/bash
 
 source /opt/raxapitest/chef_bootstrap.env;
-echo $PLATFORM
-echo $PLATFORM_VERSION
-echo $MACHINE_ARCH
+echo $PLATFORM;
+echo $PLATFORM_VERSION;
+echo $MACHINE_ARCH;
 
 sleep 60;
 
