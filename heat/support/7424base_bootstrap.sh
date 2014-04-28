@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "Hello $monde" > /var/tmp/hmonde;
 sleep 60;
 yum -y -v remove firewalld && \
   yum -y -v install iptables-services && \
