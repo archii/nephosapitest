@@ -1,2 +1,0 @@
-#heat -v stack-create ponytest-stack --template-file ponytest.template 
-#heat -v stack-create ponytest-stack --template-file ponytest.template 

@@ -51,7 +51,6 @@ resources:
       personality: { 
         "/etc/sysconfig/iptables": { get_file: ./support/iptables.config },
         "/opt/raxapitest/chef_client_bootstrap.sh": { get_file: ./support/chef_client_bootstrap.sh },
-        "/opt/raxapitest/chef_client_bootstrap.env": { get_file: ./support/chef_client_bootstrap.env }
       }
       user_data:
         str_replace:
