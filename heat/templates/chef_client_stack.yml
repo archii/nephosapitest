@@ -1,29 +1,36 @@
 heat_template_version: 2013-05-23
 
 description:
-  template should spin up a single FC20 instance and bootstrap it with a working chef-client
+  template will spin up a single FC20 instance and bootstrap it with a working chef-client
 
 parameters:
-  myMonde:
-    type: string
-    default: "Terra1"
-  foo:
-    type: string
-    default: "barbaz"
   myimagename:
     type: string
     label: myimagename
     description: cloud image to use for the instance
-    default: "Fedora 20 (Heisenbug) (PVHVM)"
+    default: "tcserious_image-20140429"
     hidden: false
     constraints:
       - length: { min: 6 }
         description: image name length must be at least 6 characters.
+  myflavor:
+    type: string
+    label: myflavor
+    description: sizing for instance
+    default: 512MB Standard Instance 
+    hidden: false
+    constraints:
+      - allowed_values:
+        - 512MB Standard Instance 
+        - 1GB Standard Instance
+        - 2GB Standard Instance
+        - 4GB Standard Instance
+        - 8GB Standard Instance
   myhostname:
     type: string
     label: myhostname
     description: base hostname of the instance
-    default: "eggs687"
+    default: "chefnode01"
     hidden: false
     constraints:
       - allowed_pattern: "[a-z0-9]+"
@@ -45,39 +52,24 @@ resources:
     type: "Rackspace::Cloud::Server"
     properties:
       admin_pass: { get_param: myadminpass }
-      flavor: 512MB Standard Instance
+      flavor: { get_param: myflavor }
       image: { get_param: myimagename }
       name: { get_param: myhostname }
       personality: { 
         "/etc/sysconfig/iptables": { get_file: ./support/iptables.config },
         "/opt/raxapitest/chef_client_bootstrap.sh": { get_file: ./support/chef_client_bootstrap.sh },
       }
-      user_data:
-        str_replace:
-          template: |
-            #!/bin/bash
-            echo "Hello $monde" > /var/tmp/hmonde;
-            bash /opt/raxapitest/chef_client_bootstrap.sh;
-          params:
-            $monde: { get_param: myMonde }
+      user_data: |
+        #!/bin/bash
+        bash /opt/raxapitest/chef_client_bootstrap.sh;
 
 outputs:
-  foo:
-    description: foo
-    value: { get_param: foo }
   public_ip:
     description: public IP of the deployed instance
     value: { get_attr: [compute_instance, accessIPv4] }
   instance_param_hostname:
     description: hostname according to the myhostname param
     value: { get_param: myhostname }
-  displayname:
-    description: myhostname with newline chaacters
-    value:
-      str_replace:
-        template: name\n
-        params:
-          name: { get_param: myhostname }
   instance_details:
     description: details of new instance
     value: { get_attr: [compute_instance, show] }
