@@ -55,12 +55,9 @@ resources:
       flavor: { get_param: myflavor }
       image: { get_param: myimagename }
       name: { get_param: myhostname }
-      personality: { 
-        "/opt/raxapitest/chef_client_bootstrap.sh": { get_file: ./support/chef_client_bootstrap.sh }
-      }
       user_data: |
         #!/bin/bash
-        bash /opt/raxapitest/chef_client_bootstrap.sh;
+        curl -L https://www.opscode.com/chef/install.sh | bash;
 
 outputs:
   public_ip:
