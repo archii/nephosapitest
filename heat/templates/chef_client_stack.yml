@@ -30,7 +30,7 @@ parameters:
     type: string
     label: myhostname
     description: base hostname of the instance
-    default: "chefnode01"
+    default: "ccnode01"
     hidden: false
     constraints:
       - allowed_pattern: "[a-z0-9]+"
