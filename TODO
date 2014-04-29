@@ -1,13 +1,13 @@
 - Jenkins project to automatically build the stack on check-in etc*
-- Migrate ad-hoc user-data commands to Chef recipes
+- Migrate ad-hoc user-data commands and shell scripts to Chef cookbooks
 - use a custom Python wrapper around the pyrax/heatclient/novaclient APIs
 - bolt on a web form gui for entering template parameters and kicking off the Heat build with the template
-- Basic [NGINX/PHP-FPM or Python/Flask] stacked application that will return facter type details about the instances in the stack
-- add an extra server, a load balancer and monitoring to the template
-- more HOT template features to explore:
+- Basic [NGINX/PHP-FPM or Python/Flask] stacked application that will return ohai/php-info type details about the instances in the stack
+- add an extra server, a load balancer, autoscaling and monitoring to the template
+- more HOT template instance attributes to parameterize:
   parameters*
   admin_pass*
-  flavor
+  flavor*
   image*
   hostname*
   ssh keys
