@@ -67,7 +67,7 @@ resources:
             #!/bin/bash
             curl -L https://www.opscode.com/chef/install.sh | bash;
             chef-client -j $attribfile;
-           params:
+          params:
             $attribfile: { get_param: mychefattribs }
 
         
