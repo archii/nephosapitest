@@ -58,7 +58,8 @@ resources:
       user_data: |
         #!/bin/bash
         curl -L https://www.opscode.com/chef/install.sh | bash;
-
+        chef-client -j /etc/chef/first-boot.json;
+        
 outputs:
   public_ip:
     description: public IP of the deployed instance
