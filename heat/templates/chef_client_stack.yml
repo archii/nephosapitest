@@ -43,6 +43,13 @@ parameters:
     description: path to first-boot style JSON file for assigning initial Chef attributes 
     default: /etc/chef/first-boot.json
     hidden: false 
+    constraints:
+      - allowed_values:
+        - /etc/chef/first-boot.json
+        - /etc/chef/nginx-php-fpm.json
+        - /etc/chef/mysql-high.json
+        - /etc/chef/mysql-med.json
+        - /etc/chef/mysql-low.json
   myadminpass:
     type: string
     label: myadminpass
