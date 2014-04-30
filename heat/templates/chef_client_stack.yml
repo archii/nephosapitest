@@ -37,6 +37,12 @@ parameters:
         description: hostname must consist of lowercase characters and numbers only.
       - length: { min: 4, max: 8 }
         description: Hostname length must be between 6 and 8 characters.
+  mychefattribs:
+    type: string
+    label: mychefattribs
+    description: path to first-boot style JSON file for assigning initial Chef attributes 
+    default: /etc/chef/first-boot.json
+    hidden: false 
   myadminpass:
     type: string
     label: myadminpass
@@ -56,9 +62,14 @@ resources:
       image: { get_param: myimagename }
       name: { get_param: myhostname }
       user_data: |
-        #!/bin/bash
-        curl -L https://www.opscode.com/chef/install.sh | bash;
-        chef-client -j /etc/chef/first-boot.json;
+        str_replace:
+          template: |
+            #!/bin/bash
+            curl -L https://www.opscode.com/chef/install.sh | bash;
+            chef-client -j $attribfile;
+           params:
+            $attribfile: { get_param: mychefattribs }
+
         
 outputs:
   public_ip:
