@@ -1,0 +1,25 @@
+uninstall firewalld
+install iptables-services
+install basic restrictive iptables rules
+create user admin
+admin sudo access
+admin ssh authorized_keys file
+yum update
+yum install git
+create sandbox
+yum install tmux/byobu
+yum install tree
+install build-essentials
+easy_install pip
+pip install rackspace-novaclient
+pip install python-heatclient
+pip install pyrax
+git clone repos to sandbox
+setup environment variables, aliases, etc.
+yum install ipython
+install vim
+install virtualenvwrapper
+git clone chef-repo
+copy chef .pem files into place
+
+
