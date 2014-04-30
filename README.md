@@ -23,13 +23,13 @@ To use/Quickstart:
 * Glue and Duct Tape
 
 ## Milestones
-1. Build a customized server using Heat and user-data
+1. - [ ] Build a customized server using Heat and user-data
 2. - [ ] Automate the build using shell scripts, Heat CLI and Make
-- [ ] Create a Jenkins job to automatically build/test the project
-4. Build the Nginx/PHP-FHM server using Heat and user data
-5. Configure automated deployment of a simple PHP app to the web server instance
-6. Build out the rest of the infrastructure using Heat (LB, Varnish, DB, Memcache)
-7. Web interface for kicking off the build with parameters for build time customization
-8. Replacing the user-data hackery with Chef code
-9. Replacing the shell scripts and Heat CLI with Python code using the Heat Python API and Pyrax
-10. Profit :-)
+3. - [ ] Create a Jenkins job to automatically build/test the project
+4. - [ ] Build the Nginx/PHP-FHM server using Heat and user data
+5. - [ ] Configure automated deployment of a simple PHP app to the web server instance
+6. - [ ] Build out the rest of the infrastructure using Heat (LB, Varnish, DB, Memcache)
+7. - [ ] Web interface for kicking off the build with parameters for build time customization
+8. - [ ] Replacing the user-data hackery with Chef code
+9. - [ ] Replacing the shell scripts and Heat CLI with Python code using the Heat Python API and Pyrax
+10. - [ ] Profit :-)
