@@ -24,8 +24,8 @@ To use/Quickstart:
 
 ## Milestones
 1. Build a customized server using Heat and user-data
-2. Automate the build using shell scripts, Heat CLI and Make
-3. Create a Jenkins job to automatically build/test the project
+2. - [ ] Automate the build using shell scripts, Heat CLI and Make
+- [ ] Create a Jenkins job to automatically build/test the project
 4. Build the Nginx/PHP-FHM server using Heat and user data
 5. Configure automated deployment of a simple PHP app to the web server instance
 6. Build out the rest of the infrastructure using Heat (LB, Varnish, DB, Memcache)
