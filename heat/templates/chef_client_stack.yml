@@ -41,12 +41,12 @@ parameters:
     type: string
     label: mychefattrib
     description: path or URL to first-boot style JSON file for assigning initial Chef attributes 
-    default: chef-client
+    default: https://d2f8b2f2ed0164ad2acb-f495505e179839f6b036fbd12d4c94d6.ssl.cf4.rackcdn.com/chef-client.json
     hidden: false 
     constraints:
       - allowed_values:
-        - chef-client
-        - nginx-php-fpm
+        - https://d2f8b2f2ed0164ad2acb-f495505e179839f6b036fbd12d4c94d6.ssl.cf4.rackcdn.com/chef-client.json
+        - https://d2f8b2f2ed0164ad2acb-f495505e179839f6b036fbd12d4c94d6.ssl.cf4.rackcdn.com/nginx-php-fpm.json
         - mysql-high
         - mysql-med
         - mysql-low
@@ -68,10 +68,6 @@ resources:
       flavor: { get_param: myflavor }
       image: { get_param: myimagename }
       name: { get_param: myhostname }
-      personality: { 
-        "/etc/chef/{ get_param: mychefattrib }.json": { get_file: ../profiles/{ get_param: mychefattrib }/{ get_param: mychefattrib }.json }
-      }
-
       user_data:
         str_replace:
           template: |
@@ -79,7 +75,7 @@ resources:
             curl -L "https://www.opscode.com/chef/install.sh" | bash;
             chef-client -j "$attribfile";
           params:
-            $attribfile: { get_param: mychefattribs }
+            $attribfile: { get_param: mychefattrib }
 
         
 outputs:
