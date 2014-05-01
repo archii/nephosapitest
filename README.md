@@ -26,10 +26,11 @@ To use/Quickstart:
 - [x] Build a customized server using Heat and user-data
 - [x] Automate the build using shell scripts, Heat CLI and Make
 - [x] Create a Jenkins job to automatically build/test the project
-- [ ] Build the Nginx/PHP-FHM server using Heat and user data
+- [ ] ~~Build the Nginx/PHP-FHM server using Heat and user data~~
+- [ ] Replace the user-data hackery with Chef bootstrapping
+- [ ] Automate provisioning of the application infrastructure layer with Chef
 - [ ] Configure automated deployment of a simple PHP app to the web server instance
 - [ ] Build out the rest of the infrastructure using Heat (LB, Varnish, DB, Memcache)
 - [ ] Web interface for kicking off the build with parameters for build time customization
-- [ ] Replacing the user-data hackery with Chef code
 - [ ] Replacing the shell scripts and Heat CLI with Python code using the Heat Python API and Pyrax
 - [ ] Profit :-)
