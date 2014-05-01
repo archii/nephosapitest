@@ -61,13 +61,13 @@ resources:
       flavor: { get_param: myflavor }
       image: { get_param: myimagename }
       name: { get_param: myhostname }
-      user_data: |
+      user_data:
         str_replace:
           template: |
             #!/bin/bash
-            curl -L https://www.opscode.com/chef/install.sh | bash;
-            chef-client -j $attribfile;
-           params:
+            curl -L "https://www.opscode.com/chef/install.sh" | bash;
+            chef-client -j "$attribfile";
+          params:
             $attribfile: { get_param: mychefattribs }
 
         

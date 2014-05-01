@@ -13,3 +13,6 @@ jenkins3:
 
 npf3:
 	time heat stack-create npf3.stack -f heat/templates/npf.stack.yml -P "myhostname=npf3;myimagename=eggs687-201404130220"
+
+chefclient:
+	bash test_heat_chef.sh
