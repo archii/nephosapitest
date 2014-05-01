@@ -37,19 +37,19 @@ parameters:
         description: hostname must consist of lowercase characters and numbers only.
       - length: { min: 4, max: 8 }
         description: Hostname length must be between 6 and 8 characters.
-  mychefattribs:
+  mychefattrib:
     type: string
-    label: mychefattribs
+    label: mychefattrib
     description: path or URL to first-boot style JSON file for assigning initial Chef attributes 
-    default: /etc/chef/first-boot.json
+    default: chef-client
     hidden: false 
     constraints:
       - allowed_values:
-        - /etc/chef/first-boot.json
-        - /etc/chef/nginx-php-fpm.json
-        - /etc/chef/mysql-high.json
-        - /etc/chef/mysql-med.json
-        - /etc/chef/mysql-low.json
+        - chef-client
+        - nginx-php-fpm
+        - mysql-high
+        - mysql-med
+        - mysql-low
   myadminpass:
     type: string
     label: myadminpass
@@ -68,6 +68,10 @@ resources:
       flavor: { get_param: myflavor }
       image: { get_param: myimagename }
       name: { get_param: myhostname }
+      personality: { 
+        "/etc/chef/{ get_param: mychefattrib }.json": { get_file: ../profiles/{ get_param: mychefattrib }/{ get_param: mychefattrib }.json }
+      }
+
       user_data:
         str_replace:
           template: |
