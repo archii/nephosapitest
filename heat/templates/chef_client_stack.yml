@@ -40,14 +40,14 @@ parameters:
   mychefattribs:
     type: string
     label: mychefattribs
-    description: path to first-boot style JSON file for assigning initial Chef attributes 
+    description: path or URL to first-boot style JSON file for assigning initial Chef attributes 
     default: /etc/chef/first-boot.json
     hidden: false 
   myadminpass:
     type: string
     label: myadminpass
     description: root password
-    default: "h@d0uke3N"
+    default: "ceaqg4aGirNq"
     hidden: false
     constraints:
       - length: { min: 8 }
