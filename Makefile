@@ -16,3 +16,7 @@ npf3:
 
 chefclient:
 	bash test_heat_chef.sh
+
+npf4:
+	bash -x test_heat_chef.sh nginx-php-fpm
+
