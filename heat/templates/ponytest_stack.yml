@@ -82,7 +82,6 @@ resources:
       #personality: {"/etc/hostname": { get_param: myhostname }, "/etc/sysconfig/iptables": { get_file: /home/admin/code/archii/raxapitest/heat/iptables.config } }
       #personality: {"/etc/hostname": { get_param: foo } }
       personality: { 
-        "/etc/sysconfig/iptables": { get_file: ./support/iptables.config },
         "/opt/raxapitest/7424base_bootstrap.sh": { get_file: ./support/7424base_bootstrap.sh }
       }
       user_data:
