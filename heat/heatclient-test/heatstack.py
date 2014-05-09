@@ -73,8 +73,9 @@ class HeatStack():
         self.id = myresult['stack']['id']
 
     def delete(self):
-        self.client.stacks.delete(self.id)
-        
+        myresult = self.client.stacks.delete(self.id)
+        return myresult
+    
 #     def get(self):
 #         return self.botoconnection.describe_stacks(self.name)[0]
 # 
