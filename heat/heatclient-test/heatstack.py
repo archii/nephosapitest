@@ -69,13 +69,13 @@ class HeatStack():
             'environment': env
         }
         
-        pass
-
         myresult = self.client.stacks.create(**fields)
+        self.id = myresult['stack']['id']
+
+    def delete(self):
+        myresult = self.client.stacks.delete(self.id)
         return myresult
-
-        pass
-
+    
 #     def get(self):
 #         return self.botoconnection.describe_stacks(self.name)[0]
 # 
