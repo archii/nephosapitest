@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/env python
 # coding: utf-8
 import os
 import ConfigParser
@@ -12,6 +12,6 @@ mytemplatefile='7424uu_stack.yml'
 #myimagename="Fedora 20 (Heisenbug) (PVHVM)"
 myimagename="Red Hat Enterprise Linux 6.5"
 mystack = HeatStack(config, mystackname, template_file=mytemplatefile, parameters={"myimagename":myimagename})
-daStack = mystack.create()
-print "The stack id:", daStack['stack']['id']
+mystack.create()
+print "The stack id:", mystack.id
 blah = 0
