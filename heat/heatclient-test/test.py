@@ -46,4 +46,3 @@ if mystack.id:
     elif (mystack.status() == "COMPLETE") and (not SUTD):
         print "Stack " + mystack.name + " is up and running."
 
-blah = 0
