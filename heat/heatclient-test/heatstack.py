@@ -71,10 +71,15 @@ class HeatStack():
         
         myresult = self.client.stacks.create(**fields)
         self.id = myresult['stack']['id']
+        self.stack = self.client.stacks.get(self.id)
 
     def delete(self):
         myresult = self.client.stacks.delete(self.id)
         return myresult
+    
+    def status(self):
+        return self.stack.status
+    
     
 #     def get(self):
 #         return self.botoconnection.describe_stacks(self.name)[0]
