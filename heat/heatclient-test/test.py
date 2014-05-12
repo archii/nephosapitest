@@ -24,8 +24,9 @@ if mystack.id:
     print "The stack id:", mystack.id
     print "The stack name:", mystack.name
     print "The stack status:", mystack.status()
-    while mystack.status() == "CREATE_IN_PROGRESS":
-        print "Polling for status in" + str(CREATE_POLL_INTERVAL) + " seconds ..."
+    #while mystack.status() == "CREATE_IN_PROGRESS":
+    while mystack.status() == "IN_PROGRESS":
+        print "Polling for status in " + str(CREATE_POLL_INTERVAL) + " seconds ..."
         sleep(CREATE_POLL_INTERVAL)
         print mystack.status()
     if (mystack.status() == "CREATE_COMPLETE") and (SUTD):
