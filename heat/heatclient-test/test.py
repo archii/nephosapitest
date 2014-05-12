@@ -7,8 +7,8 @@ from heatstack import HeatStack
 config = ConfigParser.ConfigParser()
 config.readfp(open('defaults.cfg'))
 
-CREATE_POLL_INTERVAL=60
-DELETE_POLL_INTERVAL=10
+CREATE_POLL_INTERVAL=360
+DELETE_POLL_INTERVAL=5
 SUTD=True
 
 import uuid
@@ -24,24 +24,26 @@ if mystack.id:
     print "The stack id:", mystack.id
     print "The stack name:", mystack.name
     print "The stack status:", mystack.status()
-    #while mystack.status() == "CREATE_IN_PROGRESS":
     while mystack.status() == "IN_PROGRESS":
         print "Polling for status in " + str(CREATE_POLL_INTERVAL) + " seconds ..."
         sleep(CREATE_POLL_INTERVAL)
         print mystack.status()
-    if (mystack.status() == "CREATE_COMPLETE") and (SUTD):
+
+    if (mystack.status() == "COMPLETE") and (SUTD):
         print mystack.status()
-        sleep(30)
         print "Tearing down stack " + mystack.name + " after successful test..."
-        mystack.delete(mystack.id)
-        while mystack.status() == "DELETE_IN_PROGRESS":
+        sleep(10)
+        mystack.delete()
+        print mystack.status()
+        sleep(5)
+        while mystack.status() == "IN_PROGRESS":
             print "Polling for DELETE status in " + DELETE_POLL_INTERVAL + " seconds..."
             sleep(DELETE_POLL_INTERVAL)
             print mystack.status()
         if not mystack.status():
             print "Stack " + mystack.name + " is DELETED!"
             print "Test complete!"
-    elif (mystack.status() == "CREATE_COMPLETE") and (not SUTD):
+    elif (mystack.status() == "COMPLETE") and (not SUTD):
         print "Stack " + mystack.name + " is up and running."
 
 blah = 0
