@@ -7,8 +7,8 @@ from heatstack import HeatStack
 config = ConfigParser.ConfigParser()
 config.readfp(open('defaults.cfg'))
 
-CREATE_POLL_INTERVAL=360
-DELETE_POLL_INTERVAL=5
+CREATE_POLL_INTERVAL=180
+DELETE_POLL_INTERVAL=10
 SUTD=True
 
 import uuid
@@ -30,14 +30,13 @@ if mystack.id:
         print mystack.status()
 
     if (mystack.status() == "COMPLETE") and (SUTD):
-        print mystack.status()
         print "Tearing down stack " + mystack.name + " after successful test..."
         sleep(10)
         mystack.delete()
         print mystack.status()
         sleep(5)
         while mystack.status() == "IN_PROGRESS":
-            print "Polling for DELETE status in " + DELETE_POLL_INTERVAL + " seconds..."
+            print "Polling for DELETE status in " + str(DELETE_POLL_INTERVAL) + " seconds..."
             sleep(DELETE_POLL_INTERVAL)
             print mystack.status()
         if not mystack.status():
