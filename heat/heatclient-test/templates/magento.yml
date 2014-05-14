@@ -1,0 +1,108 @@
+heat_template_version: 2013-05-23
+
+description: Magento deployment
+
+resources:
+#  ssh_key:
+#    type: OS::Nova::KeyPair
+#    properties:
+#      name: SSH_Key
+#      save_private_key: True
+
+
+  cache_lb:
+    type: Rackspace::Cloud::LoadBalancer
+    properties:
+      port: 80
+      protocol: HTTP
+      virtualIps: [{ ipVersion: IPV4, type: PUBLIC }]
+      nodes:
+
+  cache_server:
+    type: Rackspace::Cloud::Server
+    properties:
+      name: cache_server
+#      key_name: Ansible Key
+      flavor: "2"
+      image: 2936a16d-ee01-452c-a6ab-7117df5196f8
+#      user_data: "YXB0LWdldCB1cGRhdGUKYXB0LWdldCAteSB1cGdyYWRlCmFwdC1nZXQgLXkgaW5zdGFsbCByZWRpcwo=" 
+#      networks:
+#      - uuid: 00000000-0000-0000-0000-000000000000
+#      - uuid: 11111111-1111-1111-1111-111111111111
+
+
+  cache_autoscale:
+    type: Rackspace::AutoScale::Group
+    properties:
+      groupConfiguration:
+        name: Cache AutoScale
+        cooldown: 60
+        maxEntities: 5
+        minEntities: 0
+      launchConfiguration:
+        args:
+          loadBalancers: [ {loadBalancerId: { Ref: cache_lb }, port: 80} ]
+          server:
+            name: cache_server-clone
+            key_name: Ansible Key
+            flavorRef: "2"
+            imageRef: 2936a16d-ee01-452c-a6ab-7117df5196f8
+            networks:
+            - uuid: 00000000-0000-0000-0000-000000000000
+            - uuid: 11111111-1111-1111-1111-111111111111
+        type: launch_server
+
+
+#  web_lb:
+#    type: Rackspace::Cloud::LoadBalancer
+#    properties:
+#      port: 80
+#      protocol: HTTP
+#      virtualIps: [{ ipVersion: IPV4, type: PUBLIC }]
+#      nodes:
+#
+#  web_autoscale:
+#    type: Rackspace::AutoScale::Group
+#    properties:
+#      groupConfiguration:
+#        name: Web AutoScale
+#        cooldown: 60
+#        maxEntities: 5
+#        minEntities: 1
+#      launchConfiguration:
+#        args:
+#          loadBalancers: [ {loadBalancerId: { Ref: web_lb }, port: 80} ]
+#          server:
+#            name: web_server
+#            key_name: SSH_Key
+#            flavorRef: "2"
+#            imageRef: 2936a16d-ee01-452c-a6ab-7117df5196f8
+#        type: launch_server
+#
+#  app_lb:
+#    type: Rackspace::Cloud::LoadBalancer
+#    properties:
+#      port: 80
+#      protocol: HTTP
+#      virtualIps: [{ ipVersion: IPV4, type: PUBLIC }]
+#      nodes:
+#
+#  app_autoscale:
+#    type: Rackspace::AutoScale::Group
+#    properties:
+#      groupConfiguration:
+#        name: app AutoScale
+#        cooldown: 60
+#        maxEntities: 5
+#        minEntities: 1
+#      launchConfiguration:
+#        args:
+#          loadBalancers: [ {loadBalancerId: { Ref: app_lb }, port: 80} ]
+#          server:
+#            name: app_server
+#            key_name: SSH_Key
+#            flavorRef: "2"
+#            imageRef: 2936a16d-ee01-452c-a6ab-7117df5196f8
+#        type: launch_server
+
+
