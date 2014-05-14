@@ -76,25 +76,21 @@ class HeatStack():
         return self.client.stacks.delete(self.id)
     
     def status(self):
-        return self.client.stacks.get(self.id).status
+        return self.client.stacks.get(self.id).stack_status
     
-    
+    def summary(self):
+        stack = self.client.stacks.get(self.id)
+        import ipdb
+        ipdb.set_trace()
+        stack_summary = {
+             "id":stack.id, 
+             'name':stack.stack_name, 
+             'status':stack.stack_status,
+             'description':stack.description,
+             'creation_time':stack.creation_time
+        }
+        return stack_summary
+
 #     def get(self):
 #         return self.botoconnection.describe_stacks(self.name)[0]
 # 
-#     def get_status(self):
-#         return self.get().stack_status
-# 
-#     def get_summary(self):
-#         stack = self.get()
-#         stack_summary = {
-#             "id":stack.stack_id, 
-#             'name':stack.stack_name, 
-#             'status':stack.stack_status,
-#             'description':stack.description,
-#             'creation_time':stack.creation_time
-#         }
-#         return stack_summary
-#     
-#     def delete(self, stack_id):
-#         return self.botoconnection.delete_stack(stack_id)
