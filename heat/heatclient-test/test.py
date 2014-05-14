@@ -13,7 +13,7 @@ SUTD=True
 
 import uuid
 mystackname = "h" + str(uuid.uuid4().time_mid)
-mytemplatefile='7424uu_stack.yml'
+mytemplatefile='templates/7424uu_stack.yml'
 #myimagename="Fedora 20 (Heisenbug) (PVHVM)"
 myimagename="Red Hat Enterprise Linux 6.5"
 mystack = HeatStack(config, mystackname, template_file=mytemplatefile, parameters={"myimagename":myimagename})
