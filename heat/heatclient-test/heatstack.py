@@ -80,8 +80,6 @@ class HeatStack():
     
     def summary(self):
         stack = self.client.stacks.get(self.id)
-        import ipdb
-        ipdb.set_trace()
         stack_summary = {
              "id":stack.id, 
              'name':stack.stack_name, 
