@@ -14,7 +14,8 @@ from auth import KSClient
 logger = logging.getLogger(__name__)
 
 class HeatStack():
-    def __init__(self, config, stackname, stacktype='default', template_file=None, template_url=None, parameters = None):
+    #def __init__(self, config, stackname, stacktype='default', template_file=None, template_url=None, parameters = None):
+    def __init__(self, config, stackname, stacktype='default', template_file=None, template_url=None):
         self.tenant_id = ( config.get('auth','tenant_id') or utils.env('OS_TENANT_ID') )
         self.tenant_name = ( config.get('auth','tenant_name') or utils.env('OS_TENANT_NAME') )
         self.password = ( config.get('auth', 'password') or utils.env('OS_PASSWORD') )
@@ -33,7 +34,8 @@ class HeatStack():
         self.template_url = template_url
         self.template_object = None
         self.stacktype = stacktype
-        self.parameters = parameters
+        # parameters should be injected into the HeatStack object after the class has been instantiated in an external script
+        #self.parameters = parameters
         
         kwargs = {
             'token': self.token,
