@@ -65,12 +65,14 @@ class HeatStack():
         fields = {
             'stack_name': self.name,
             'disable_rollback': False, #not(args.enable_rollback),
-            'parameters': self.parameters, #utils.format_parameters(self.parameters),
             'template': template,
             'files': dict(list(tpl_files.items()) + list(env_files.items())),
             'environment': env
         }
         
+        if self.parameters:
+            fields['parameters'] = self.parameter #utils.format_parameters(self.parameters),
+            
         myresult = self.client.stacks.create(**fields)
         self.id = myresult['stack']['id']
 
