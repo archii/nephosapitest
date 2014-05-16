@@ -33,9 +33,9 @@ parameters:
     default: "server01"
     hidden: false
     constraints:
-      - allowed_pattern: "[a-z0-9]+"
-        description: hostname must consist of lowercase characters and numbers only.
-      - length: { min: 4, max: 8 }
+      - allowed_pattern: "[a-z0-9-_]+"
+        description: hostname must consist of dashes, underscores, lowercase characters and numbers only.
+      - length: { min: 4, max: 16 }
         description: Hostname length must be between 6 and 8 characters.
   myadminpass:
     type: string
