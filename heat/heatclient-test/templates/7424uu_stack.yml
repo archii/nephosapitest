@@ -59,6 +59,7 @@ resources:
         #!/bin/bash
         sleep 30;
         yum -y -v update;
+        exit 0;
         
 outputs:
   public_ip:
