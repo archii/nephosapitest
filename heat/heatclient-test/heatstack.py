@@ -14,7 +14,8 @@ from auth import KSClient
 logger = logging.getLogger(__name__)
 
 class HeatStack():
-    def __init__(self, config, stackname, stacktype='default', template_file=None, template_url=None, parameters = None):
+    #def __init__(self, config, stackname, stacktype='default', template_file=None, template_url=None, parameters = None):
+    def __init__(self, config, stackname, stacktype='default', template_file=None, template_url=None):
         self.tenant_id = ( config.get('auth','tenant_id') or utils.env('OS_TENANT_ID') )
         self.tenant_name = ( config.get('auth','tenant_name') or utils.env('OS_TENANT_NAME') )
         self.password = ( config.get('auth', 'password') or utils.env('OS_PASSWORD') )
@@ -33,7 +34,8 @@ class HeatStack():
         self.template_url = template_url
         self.template_object = None
         self.stacktype = stacktype
-        self.parameters = parameters
+        # parameters should be injected into the HeatStack object after the class has been instantiated in an external script
+        #self.parameters = parameters
         
         kwargs = {
             'token': self.token,
@@ -63,12 +65,14 @@ class HeatStack():
         fields = {
             'stack_name': self.name,
             'disable_rollback': False, #not(args.enable_rollback),
-            'parameters': self.parameters, #utils.format_parameters(self.parameters),
             'template': template,
             'files': dict(list(tpl_files.items()) + list(env_files.items())),
             'environment': env
         }
         
+        if self.parameters:
+            fields['parameters'] = self.parameters #utils.format_parameters(self.parameters),
+            
         myresult = self.client.stacks.create(**fields)
         self.id = myresult['stack']['id']
 
@@ -76,25 +80,19 @@ class HeatStack():
         return self.client.stacks.delete(self.id)
     
     def status(self):
-        return self.client.stacks.get(self.id).status
+        return self.client.stacks.get(self.id).stack_status
     
-    
+    def summary(self):
+        stack = self.client.stacks.get(self.id)
+        stack_summary = {
+             "id":stack.id, 
+             'name':stack.stack_name, 
+             'status':stack.stack_status,
+             'description':stack.description,
+             'creation_time':stack.creation_time
+        }
+        return stack_summary
+
 #     def get(self):
 #         return self.botoconnection.describe_stacks(self.name)[0]
 # 
-#     def get_status(self):
-#         return self.get().stack_status
-# 
-#     def get_summary(self):
-#         stack = self.get()
-#         stack_summary = {
-#             "id":stack.stack_id, 
-#             'name':stack.stack_name, 
-#             'status':stack.stack_status,
-#             'description':stack.description,
-#             'creation_time':stack.creation_time
-#         }
-#         return stack_summary
-#     
-#     def delete(self, stack_id):
-#         return self.botoconnection.delete_stack(stack_id)
