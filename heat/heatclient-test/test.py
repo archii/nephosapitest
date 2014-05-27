@@ -82,7 +82,7 @@ USAGE
         parser.add_argument('-V', '--version', action='version', version=program_version_message)
         parser.add_argument("-v", "--verbose", dest="verbose", action="count", help="set verbosity level [default: %(default)s]")
         parser.add_argument("-i", "--image", dest="image", default="Red Hat Enterprise Linux 6.5", help="name of bootstrap image to use [default: %(default)s]")
-        parser.add_argument("-t", "--template", dest="templatefile", default='7424uu_stack.yml', help="name of bootstrap image to use [default: %(default)s]")
+        parser.add_argument("-t", "--template", dest="templatefile", default='templates/7424uu_stack.yml', help="name of bootstrap image to use [default: %(default)s]")
         parser.add_argument("-P", "--parameters", dest="parameters", help="parameters to use as input to the given Heat template [default: %(default)s]")
 
         # Process arguments
