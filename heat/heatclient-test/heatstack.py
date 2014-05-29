@@ -71,7 +71,7 @@ class HeatStack():
         }
         
         if self.parameters:
-            fields['parameters'] = self.parameter #utils.format_parameters(self.parameters),
+            fields['parameters'] = self.parameters #utils.format_parameters(self.parameters),
             
         myresult = self.client.stacks.create(**fields)
         self.id = myresult['stack']['id']
