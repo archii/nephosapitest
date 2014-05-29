@@ -1,9 +1,20 @@
 all: test
 
-test: test_heat
+test: test_heatclient
+
+clean: 
+	find . -name "*.pyc" -type f -print -delete
 
 test_heat:
 	time bash test_heat.sh `uuidgen -r | cut -d- -f2` heat/templates/ponytest_stack.yml
+
+test_heatclient:
+	cd heat/heatclient-test && \
+	time python ./test.py
+
+test_heatclient_tcserious:
+	cd heat/heatclient-test && \
+	./test.py -t ../templates/ponytest_stack.yml -i tcserious_image-2014043014
 
 test_heat2:
 	time bash test_heat.sh `uuidgen -r | cut -d- -f2` heat/templates/ponytest_stack.yml tcserious_image-2014043014
