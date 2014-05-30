@@ -83,6 +83,8 @@ USAGE
         parser.add_argument("-v", "--verbose", dest="verbose", action="count", help="set verbosity level [default: %(default)s]")
         parser.add_argument("-i", "--image", dest="image", default="Red Hat Enterprise Linux 6.5", help="name of bootstrap image to use [default: %(default)s]")
         parser.add_argument("-t", "--template", dest="templatefile", default='templates/7424uu_stack.yml', help="name of bootstrap image to use [default: %(default)s]")
+        parser.add_argument("--hostname", dest="hostname", default=None, help="name of server where single server templates are in use [default: %(default)s]")
+        parser.add_argument("--stackname", dest="stackname", default=None, help="name of stack [default: %(default)s]")
         # the only parameters allowed from the test script at the moment are image, so don't need free from parameters like the heat client cli
         #parser.add_argument("-P", "--parameters", dest="parameters", help="parameters to use as input to the given Heat template [default: %(default)s]")
 
@@ -120,8 +122,16 @@ USAGE
         sys.stderr.write(indent + "  for help use --help")
         return 2
     
-    mystackname = generate_stackname()
-    myhostname = generate_hostname(mystackname)
+    if not args.stackname:
+        mystackname = generate_stackname()
+    else:
+        mystackname = args.stackname
+        
+    if not args.hostname:
+        myhostname = generate_hostname(mystackname)
+    else:
+        myhostname = args.hostname
+
     mytemplatefile=args.templatefile
     #myimagename="Fedora 20 (Heisenbug) (PVHVM)"
     myimagename=args.image

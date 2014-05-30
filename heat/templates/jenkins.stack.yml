@@ -40,8 +40,8 @@ resources:
       image: { get_param: myimagename }
       name: { get_param: myhostname }
       personality: { 
-        "/opt/raxapitest/7424base_bootstrap.sh": { get_file: ./support/7424base_bootstrap.sh },
-        "/opt/raxapitest/jenkins_bootstrap.sh": { get_file: ./support/jenkins_bootstrap.sh }
+        "/opt/raxapitest/7424base_bootstrap.sh": { get_file: ../support/7424base_bootstrap.sh },
+        "/opt/raxapitest/jenkins_bootstrap.sh": { get_file: ../support/jenkins_bootstrap.sh }
       }
       user_data: |
             #!/bin/bash
