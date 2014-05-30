@@ -11,11 +11,11 @@ test_heatclient:
 
 test_heatclient_tcserious:
 	cd heat/heatclient-test && \
-	./test.py -t ../templates/ponytest_stack.yml -i tcserious_image-2014043014
+	time python ./test.py -t ../templates/ponytest_stack.yml -i tcserious_image-2014043014
 
 jenkins4:
 	cd heat/heatclient-test && \
-	./test.py -t ../templates/jenkins.stack.yml --stackname jenkins4.stack --hostname jenkins4
+	time python ./test.py -t ../templates/jenkins.stack.yml --stackname jenkins4.stack --hostname jenkins4
 
 chefclient:
 	bash test_heat_chef.sh
