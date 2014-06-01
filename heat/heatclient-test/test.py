@@ -85,6 +85,7 @@ USAGE
         parser.add_argument("-t", "--template", dest="templatefile", default='templates/7424uu_stack.yml', help="name of bootstrap image to use [default: %(default)s]")
         parser.add_argument("--hostname", dest="hostname", default=None, help="name of server where single server templates are in use [default: %(default)s]")
         parser.add_argument("--stackname", dest="stackname", default=None, help="name of stack [default: %(default)s]")
+        parser.add_argument("--role", dest="role", default=None, help="name of (chef) role to assume in single server stacks [default: %(default)s]")
         # the only parameters allowed from the test script at the moment are image, so don't need free from parameters like the heat client cli
         #parser.add_argument("-P", "--parameters", dest="parameters", help="parameters to use as input to the given Heat template [default: %(default)s]")
 
@@ -132,12 +133,19 @@ USAGE
     else:
         myhostname = args.hostname
 
+    if args.role:
+        myjson="https://d2f8b2f2ed0164ad2acb-f495505e179839f6b036fbd12d4c94d6.ssl.cf4.rackcdn.com/%s.json" % (args.role)
+    else:
+        myjson=None
+        
     mytemplatefile=args.templatefile
     #myimagename="Fedora 20 (Heisenbug) (PVHVM)"
     myimagename=args.image
     #mystack = HeatStack(config, mystackname, template_file=mytemplatefile, parameters={"myimagename":myimagename,"myhostname":myhostname})
     mystack = HeatStack(config, mystackname, template_file=mytemplatefile)
-    mystack.parameters = {"myimagename":myimagename,"myhostname":myhostname} 
+    mystack.parameters = {"myimagename":myimagename,"myhostname":myhostname,"mychefattrib":myjson} 
+    
+    
     # the only parameters allowed from the test script at the moment are image, so don't need free from parameters like the heat client cli
     #mystack.parameters = args.parameters
     mystack.id = None
