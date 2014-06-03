@@ -150,7 +150,9 @@ USAGE
     myimagename=args.image
     #mystack = HeatStack(config, mystackname, template_file=mytemplatefile, parameters={"myimagename":myimagename,"myhostname":myhostname})
     mystack = HeatStack(config, mystackname, template_file=mytemplatefile)
-    mystack.parameters = {"myimagename":myimagename,"myhostname":myhostname,"mychefattrib":myjson} 
+    mystack.parameters = {"myimagename":myimagename,"myhostname":myhostname}
+    if myjson:
+        mystack.parameters["mychefattrib"] = myjson} 
     
     
     # the only parameters allowed from the test script at the moment are image, so don't need free from parameters like the heat client cli
