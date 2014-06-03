@@ -29,10 +29,10 @@ parameters:
     default: "testnode01"
     hidden: false
     constraints:
-      - allowed_pattern: "[a-z0-9]+"
-        description: hostname must consist of lowercase characters and numbers only.
-      - length: { min: 4, max: 10 }
-        description: Hostname length must be between 6 and 10 characters.
+      - allowed_pattern: "[a-z0-9-_]+"
+        description: hostname must consist of dashes, underscores, lowercase characters and numbers only.
+      - length: { min: 4, max: 16 }
+        description: Hostname length must be between 4 and 16 characters.
   mychefattrib:
     type: string
     label: mychefattrib

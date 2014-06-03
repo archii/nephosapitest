@@ -26,7 +26,8 @@ PROFILE = 0
 
 CREATE_POLL_INTERVAL=60
 DELETE_POLL_INTERVAL=5
-SUTD=True
+# This is now set via the --sutd command line flag
+#SUTD=True
 
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
@@ -83,7 +84,12 @@ USAGE
         parser.add_argument("-v", "--verbose", dest="verbose", action="count", help="set verbosity level [default: %(default)s]")
         parser.add_argument("-i", "--image", dest="image", default="Red Hat Enterprise Linux 6.5", help="name of bootstrap image to use [default: %(default)s]")
         parser.add_argument("-t", "--template", dest="templatefile", default='templates/7424uu_stack.yml', help="name of bootstrap image to use [default: %(default)s]")
-        parser.add_argument("-P", "--parameters", dest="parameters", help="parameters to use as input to the given Heat template [default: %(default)s]")
+        parser.add_argument("--sutd", dest="sutd", action="store_true", help="whether or not to perform the setup/teardown cycle [default: %(default)s]")
+        parser.add_argument("--hostname", dest="hostname", default=None, help="name of server where single server templates are in use [default: %(default)s]")
+        parser.add_argument("--stackname", dest="stackname", default=None, help="name of stack [default: %(default)s]")
+        parser.add_argument("--role", dest="role", default=None, help="name of (chef) role to assume in single server stacks [default: %(default)s]")
+        # the only parameters allowed from the test script at the moment are image, so don't need free from parameters like the heat client cli
+        #parser.add_argument("-P", "--parameters", dest="parameters", help="parameters to use as input to the given Heat template [default: %(default)s]")
 
         # Process arguments
         args = parser.parse_args()
@@ -119,15 +125,38 @@ USAGE
         sys.stderr.write(indent + "  for help use --help")
         return 2
     
-    mystackname = generate_stackname()
-    myhostname = generate_hostname(mystackname)
+    if not args.stackname:
+        mystackname = generate_stackname()
+    else:
+        mystackname = args.stackname
+        
+    if not args.hostname:
+        myhostname = generate_hostname(mystackname)
+    else:
+        myhostname = args.hostname
+
+    if args.role:
+        myjson="https://d2f8b2f2ed0164ad2acb-f495505e179839f6b036fbd12d4c94d6.ssl.cf4.rackcdn.com/%s.json" % (args.role)
+    else:
+        myjson=None
+        
+    if args.sutd:
+	SUTD=True
+    else:
+        SUTD=False
+
     mytemplatefile=args.templatefile
     #myimagename="Fedora 20 (Heisenbug) (PVHVM)"
     myimagename=args.image
     #mystack = HeatStack(config, mystackname, template_file=mytemplatefile, parameters={"myimagename":myimagename,"myhostname":myhostname})
     mystack = HeatStack(config, mystackname, template_file=mytemplatefile)
-    #mystack.parameters = {"myimagename":myimagename,"myhostname":myhostname} 
-    mystack.parameters = args.parameters
+    mystack.parameters = {"myimagename":myimagename,"myhostname":myhostname}
+    if myjson:
+        mystack.parameters["mychefattrib"] = myjson
+    
+    
+    # the only parameters allowed from the test script at the moment are image, so don't need free from parameters like the heat client cli
+    #mystack.parameters = args.parameters
     mystack.id = None
     mystack.create()
     
@@ -156,7 +185,7 @@ USAGE
             if not mystack.status():
                 print "Stack " + mystack.name + " is DELETED!"
                 print "Test complete!"
-        elif (mystack.status() == "DELETE_COMPLETE") and (not SUTD):
+        elif (mystack.status() == "CREATE_COMPLETE") and (not SUTD):
             print "Stack " + mystack.name + " is up and running."
     
 
