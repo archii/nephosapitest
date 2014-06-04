@@ -32,5 +32,5 @@ To use/Quickstart:
 - [ ] Configure automated deployment of a simple PHP app to the web server instance
 - [ ] Build out the rest of the infrastructure using Heat (LB, Varnish, DB, Memcache)
 - [ ] Web interface for kicking off the build with parameters for build time customization
-- [x] Replacing the shell scripts and Heat CLI with Python code using the Heat Python API and Pyrax
+- [x] Replacing the shell scripts and Heat CLI with Python code using the Heat Python API
 - [ ] Profit :-)
