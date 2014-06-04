@@ -12,7 +12,8 @@ from argparse import RawDescriptionHelpFormatter
 
 
 config = ConfigParser.ConfigParser()
-config.readfp(open('defaults.cfg'))
+#config.readfp(open('defaults.cfg'))
+config.read(['defaults.cfg', 'heat/heatclient-test/defaults.cfg'])
 
 
 __all__ = []

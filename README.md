@@ -3,12 +3,16 @@
 ## Intro
 A demonstration using DevOps/CICD with the Rackspace APIs to stand up a simple web app reference stack.
 
-To use/Quickstart:
-
+## Quickstart:
 * install the python-heatclient Python package: 'pip install python-heatclient'
 * setup your Heat API ENV variables via .bashrc
 * run 'make' for a basic example
-* run the 'test_heat.sh' script with command line args for stack/host name, Heat template, image name
+* read Makefile for examples/tests
+* run 'heat/heatclient-test/test.py -h' for list of available commandline parameters
+
+## Notes
+# Unattended chef-client bootstrap install doc
+http://docs.opscode.com/install_bootstrap.html#unattended-installs
 
 ## Goals
 * A demonstrative example of a simple web application stack.  (Load balanced web servers fronted by Varnish and running Nginx/PHP, backend Mysql DB, Memcache and Cloud Files).  
