@@ -23,5 +23,7 @@ chefclient:
 	./test.py --sutd --template ../templates/chef_client_stack.yml --stackname chef2 --role chef-client --image tcserious-2014060312
 
 npf4:
-	bash -x test_heat_chef.sh nginx-php-fpm
+	#bash -x test_heat_chef.sh nginx-php-fpm
+	cd heat/heatclient-test && \
+	./test.py --sutd --template ../templates/chef_client_stack.yml --stackname npf4 --role nginx-php-fpm --image tcserious-2014060312
 
