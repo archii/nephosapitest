@@ -11,7 +11,7 @@ A demonstration using DevOps/CICD with the Rackspace APIs to stand up a simple w
 * run 'heat/heatclient-test/test.py -h' for list of available commandline parameters
 
 ## Notes
-Unattended chef-client bootstrap install doc
+Unattended chef-client bootstrap install doc: 
 http://docs.opscode.com/install_bootstrap.html#unattended-installs
 
 ## Goals
