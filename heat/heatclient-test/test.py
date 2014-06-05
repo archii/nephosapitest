@@ -84,7 +84,7 @@ USAGE
         parser.add_argument('-V', '--version', action='version', version=program_version_message)
         parser.add_argument("-v", "--verbose", dest="verbose", action="count", help="set verbosity level [default: %(default)s]")
         parser.add_argument("-i", "--image", dest="image", default="Red Hat Enterprise Linux 6.5", help="name of bootstrap image to use [default: %(default)s]")
-        parser.add_argument("-t", "--template", dest="templatefile", default='templates/7424uu_stack.yml', help="name of bootstrap image to use [default: %(default)s]")
+        parser.add_argument("-t", "--template", dest="templatefile", default='../templates/7424uu_stack.yml', help="name of bootstrap image to use [default: %(default)s]")
         parser.add_argument("--sutd", dest="sutd", action="store_true", help="whether or not to perform the setup/teardown cycle [default: %(default)s]")
         parser.add_argument("--hostname", dest="hostname", default=None, help="name of server where single server templates are in use [default: %(default)s]")
         parser.add_argument("--stackname", dest="stackname", default=None, help="name of stack [default: %(default)s]")
