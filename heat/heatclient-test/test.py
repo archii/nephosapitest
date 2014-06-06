@@ -83,7 +83,8 @@ USAGE
         #parser.add_argument(dest="paths", help="paths to folder(s) with source file(s) [default: %(default)s]", metavar="path", nargs='+')
         parser.add_argument('-V', '--version', action='version', version=program_version_message)
         parser.add_argument("-v", "--verbose", dest="verbose", action="count", help="set verbosity level [default: %(default)s]")
-        parser.add_argument("-i", "--image", dest="image", default="Red Hat Enterprise Linux 6.5", help="name of bootstrap image to use [default: %(default)s]")
+        #parser.add_argument("-i", "--image", dest="image", default="Red Hat Enterprise Linux 6.5", help="name of bootstrap image to use [default: %(default)s]")
+        parser.add_argument("-i", "--image", dest="image", default=None, help="name of bootstrap image to use [default: %(default)s]")
         parser.add_argument("-t", "--template", dest="templatefile", default='../templates/7424uu_stack.yml', help="name of bootstrap image to use [default: %(default)s]")
         parser.add_argument("--sutd", dest="sutd", action="store_true", help="whether or not to perform the setup/teardown cycle [default: %(default)s]")
         parser.add_argument("--hostname", dest="hostname", default=None, help="name of server where single server templates are in use [default: %(default)s]")
@@ -131,10 +132,10 @@ USAGE
     else:
         mystackname = args.stackname
         
-    if not args.hostname:
-        myhostname = generate_hostname(mystackname)
-    else:
+    if args.hostname:
         myhostname = args.hostname
+    else:
+        myhostname = None
 
     if args.role:
         myjson="https://d2f8b2f2ed0164ad2acb-f495505e179839f6b036fbd12d4c94d6.ssl.cf4.rackcdn.com/%s.json" % (args.role)
@@ -151,7 +152,11 @@ USAGE
     myimagename=args.image
     #mystack = HeatStack(config, mystackname, template_file=mytemplatefile, parameters={"myimagename":myimagename,"myhostname":myhostname})
     mystack = HeatStack(config, mystackname, template_file=mytemplatefile)
-    mystack.parameters = {"myimagename":myimagename,"myhostname":myhostname}
+    mystack.parameters = {}
+    if myhostname:
+        mystack.parameters = {"myhostname":myhostname}
+    if myimagename:
+        mystack.parameters = {"myimagename":myimagename}
     if myjson:
         mystack.parameters["mychefattrib"] = myjson
     

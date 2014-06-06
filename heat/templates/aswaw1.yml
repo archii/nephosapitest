@@ -1,0 +1,42 @@
+heat_template_version: 2013-05-23
+
+description: autoscale deployment with apache website
+
+resources:
+  aswawLoadBalancer:
+    type: Rackspace::Cloud::LoadBalancer
+    properties:
+      port: 80
+      protocol: HTTP
+      #algorithm: Random
+      #algorithm: 'Random'
+      #algorithm: "Random"
+      virtualIps: [{ ipVersion: IPV4, type: PUBLIC }]
+      nodes:
+
+  aswawAutoscaleGroup:
+    type: Rackspace::AutoScale::Group
+    properties:
+      groupConfiguration:
+        name: aswawAutoscaleGroup
+        cooldown: 60
+        maxEntities: 16
+        minEntities: 1
+      launchConfiguration:
+        args:
+          loadBalancers: [ {loadBalancerId: { Ref: aswawLoadBalancer }, port: 1337} ]
+          server:
+            name: aswawServer
+            key_name: arch7424_MKQ5PQDTY4
+            flavorRef: "2"
+            imageRef: 2f9b0ce4-189d-4dd3-ba97-b33781def48f
+            networks:
+            - uuid: 00000000-0000-0000-0000-000000000000
+            - uuid: 11111111-1111-1111-1111-111111111111
+            # What a waste...
+            #user_data: |
+            #  #!/bin/bash -x
+            #  /root/node/bin/node /root/fuckyou.js;
+        type: launch_server
+
+
