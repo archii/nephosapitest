@@ -82,3 +82,14 @@ resources:
       policy: { Ref: aswawCPUScaleDown }
 
 
+
+outputs:
+  increment_url:
+    description: POST to this URL to add a server
+    value: {get_attr: [aswawCPUScaleUpWebHook, capabilityUrl]}
+  decrement_url:
+    description: POST to this URL to remove a server
+    value: {get_attr: [aswawCPUScaleDownWebHook, capabilityUrl]}
+  public_ip:
+    description: Public IP of the load balancer
+    value: {get_attr: [my_lb, PublicIp]}
