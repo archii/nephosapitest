@@ -9,10 +9,9 @@ resources:
       port: 80
       protocol: HTTP
       algorithm: LEAST_CONNECTIONS
-      #algorithm: 'Random'
-      #algorithm: "Random"
       virtualIps: [{ ipVersion: IPV4, type: PUBLIC }]
       nodes:
+
 
   aswawAutoscaleGroup:
     type: Rackspace::AutoScale::Group
@@ -29,7 +28,7 @@ resources:
             name: aswawServer
             key_name: arch7424_MKQ5PQDTY4
             flavorRef: "2"
-            imageRef: b0f9f365-b62a-4ce1-a7a9-6b53480d8886
+            imageRef: 455cf786-6a5d-4dc5-b40d-609c00365e04
             networks:
             - uuid: 00000000-0000-0000-0000-000000000000
             - uuid: 11111111-1111-1111-1111-111111111111
@@ -80,7 +79,6 @@ resources:
       #metadata: {...}
       name: aswawCPUScaleDownWebHook
       policy: { Ref: aswawCPUScaleDown }
-
 
 
 outputs:
