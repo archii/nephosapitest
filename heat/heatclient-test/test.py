@@ -85,7 +85,7 @@ USAGE
         parser.add_argument("-v", "--verbose", dest="verbose", action="count", help="set verbosity level [default: %(default)s]")
         #parser.add_argument("-i", "--image", dest="image", default="Red Hat Enterprise Linux 6.5", help="name of bootstrap image to use [default: %(default)s]")
         parser.add_argument("-i", "--image", dest="image", default=None, help="name of bootstrap image to use [default: %(default)s]")
-        parser.add_argument("-t", "--template", dest="templatefile", default='../templates/7424uu_stack.yml', help="name of bootstrap image to use [default: %(default)s]")
+        parser.add_argument("-t", "--template", dest="templatefile", default=None, help="name of bootstrap image to use [default: %(default)s]")
         parser.add_argument("--sutd", dest="sutd", action="store_true", help="whether or not to perform the setup/teardown cycle [default: %(default)s]")
         parser.add_argument("--hostname", dest="hostname", default=None, help="name of server where single server templates are in use [default: %(default)s]")
         parser.add_argument("--stackname", dest="stackname", default=None, help="name of stack [default: %(default)s]")
@@ -144,10 +144,18 @@ USAGE
         
     if args.sutd:
 	SUTD=True
+        args.templatefile='../templates/7424uu_stack.yml'
     else:
         SUTD=False
 
-    mytemplatefile=args.templatefile
+    if args.templatefile:
+        mytemplatefile=args.templatefile
+    else:
+        parser.print_help()
+	print
+        print "'--template' argument is REQUIRED."
+        sys.exit()
+
     #myimagename="Fedora 20 (Heisenbug) (PVHVM)"
     myimagename=args.image
     #mystack = HeatStack(config, mystackname, template_file=mytemplatefile, parameters={"myimagename":myimagename,"myhostname":myhostname})
