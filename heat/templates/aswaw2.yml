@@ -28,7 +28,7 @@ resources:
             name: aswawServer
             key_name: arch7424_MKQ5PQDTY4
             flavorRef: "2"
-            imageRef: 950d51cb-b44b-43b2-9f92-28a7ac49c85d
+            imageRef: d5baa82c-3f14-4f7c-9879-cfb5d6844cd4
             networks:
             - uuid: 00000000-0000-0000-0000-000000000000
             - uuid: 11111111-1111-1111-1111-111111111111
